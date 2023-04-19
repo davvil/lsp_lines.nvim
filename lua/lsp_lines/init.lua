@@ -9,7 +9,7 @@ local function render_current_line(diagnostics, ns, bufnr, opts)
   for _, diagnostic in pairs(diagnostics) do
     local show = diagnostic.end_lnum and (lnum >= diagnostic.lnum and lnum <= diagnostic.end_lnum) or (lnum == diagnostic.lnum)
 	if opts.virtual_lines.only_multiline then
-	  show = show and diagnostic.message:find("\n")
+	  show = show and (diagnostic.message:find("\n") ~= nil)
 	end
     if show then table.insert(current_line_diag, diagnostic) end
   end
